@@ -8,7 +8,7 @@ import placeholder from './images/placeholder.jpg'
 
 const App = () => {
   const [data, setData] = useState([])
-  const [query, setQuery] = useState('donald-trump')
+  const [query, setQuery] = useState('whales')
   const [isLoading, setIsLoading] = useState(false)
   const [articleNum, setArticleNum] = useState(0)
   const [value, setValue] = useState('')
@@ -39,8 +39,7 @@ const App = () => {
     setValue(event.target.value)
   }
   
-
-  const getDate = (date) => {
+  const getDate = date => {
     let dateString = '';
     dateString += date
     let splitDate = dateString.split('T');
@@ -49,15 +48,14 @@ const App = () => {
     return newDate.toDateString()
   }
 
-  console.log(getDate)
   return (
     <div className='container'>
         <div className = 'article'>
-        <div className='search-input'>
-        <form onSubmit = {handleSubmit}>
-          <input type='text' onChange = {handleInput} value={value} placeholder= '&#xF002; set(query)'/>
-        </form>
-      </div>
+          <div className='search-input'>
+            <form onSubmit = {handleSubmit}>
+              <input type='text' onChange = {handleInput} value={value} placeholder= '&#xF002; set(query)'/>
+            </form>
+        </div>
       <div className="content">
           <h1>{data.title}</h1>
          { data.urlToImage !== '' ? 
