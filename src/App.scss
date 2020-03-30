@@ -1,18 +1,130 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather&display=swap');
+
 * {
   box-sizing: border-box;
 }
 
 a {
   text-decoration: none;
-  color: #191919;
+  color: #fff;
 }
-.article {
-  width: 60%;
-  margin: auto;
 
-  img {
-    display: block;
-    filter: grayscale(1);
-    width: 100%;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #212121;
+  background-image: url('https://images.unsplash.com/photo-1566378246598-5b11a0d486cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80');
+
+  .article {
+    grid-column: 2/-1;
+    background: #191919;
+    padding: 30px;
+    color: #fff;
+    width: 600px;
+    min-height: 100vh;
+    box-shadow: 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+
+    h1 {
+      font-family: 'Merriweather', serif;
+    }
+
+    p {
+      line-height: 23px;
+      font-size: 18px;
+    }
+
+    img {
+      width: 100%;
+      background: purple;
+      mix-blend-mode: screen;
+      margin: 10px 0 20px 0;
+      box-shadow: 0px 3px 6px rgba(19, 19, 19, .5);
+    }
+
+    a {
+      font-size: 24px;
+      text-transform: uppercase;
+      display: block;
+      background: #f29f06;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      button {
+        padding: 20px;
+        border: none;
+        color: #fff;
+        font-size: 17px;
+        outline: none;
+        cursor: pointer;
+        background: #191919;
+        width: 50%;
+
+        &:hover {
+          background: #161616;
+        }
+      }
+    }
   }
+}
+
+.search-input {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: none;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  
+
+  input {
+    background: #161616;
+    border: none;
+    padding: 18px;
+    border-radius: 25px;
+    min-width: 300px;
+    outline: none;
+    box-shadow: 0px 3px 4px rgba(19, 19, 19, .5);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 400;
+    border: 1px solid #fff;
+    font-family: FontAwesome, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+}
+
+@media screen and (max-width: 550px) {
+.container {
+  .article {
+    padding-bottom: 100px;
+    h1 {
+      font-size: 22px;
+    }
+
+    p {
+      font-size: 17px;
+    }
+
+    a {
+      font-size: 20px;
+    }
+
+    .buttons {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+    }
+  }
+}
 }
