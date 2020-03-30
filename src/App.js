@@ -4,23 +4,23 @@ import axios from 'axios'
 import './App.scss'
 import {API_KEY} from './base'
 
+import placeholder from './images/placeholder.jpg'
+
 const App = () => {
   const [data, setData] = useState([])
   const [query, setQuery] = useState('donald-trump')
   const [isLoading, setIsLoading] = useState(false)
   const [articleNum, setArticleNum] = useState(0)
   const [value, setValue] = useState('')
-  const [url, setUrl] = useState(
-    `https://newsapi.org/v2/everything?q=${query}&apiKey=${API_KEY}`)
 
   useEffect(() => {
     setIsLoading(true)
-    axios.get(url)
+    axios.get(`https://newsapi.org/v2/everything?q=${query}&apiKey=${API_KEY}`)
     .then(result => {
       setData(result.data.articles[articleNum])
       setIsLoading(false)
     }).catch(error => console.log(error))
-  }, [articleNum])
+  }, [articleNum, query])
 
   const handleClick = type => {
     if(type === 'prev') setArticleNum(prevNum => prevNum - 1);
@@ -32,28 +32,42 @@ const App = () => {
   const handleSubmit = event => {
       event.preventDefault()
       setQuery(value);
-      // event.target.reset()
+      setValue('')
   }
 
   const handleInput = event => {
     setValue(event.target.value)
   }
   
+
+  const getDate = (date) => {
+    let dateString = '';
+    dateString += date
+    let splitDate = dateString.split('T');
+    let getDate = splitDate[0];
+    const newDate = new Date(getDate);
+    return newDate.toDateString()
+  }
+
+  console.log(getDate)
   return (
-    <div className="container">
-      <div className="search-input">
+    <div className='container'>
+        <div className = 'article'>
+        <div className='search-input'>
         <form onSubmit = {handleSubmit}>
-          <input type="text" onChange = {handleInput} value={value} placeholder= '&#xF002; set(query)'/>
+          <input type='text' onChange = {handleInput} value={value} placeholder= '&#xF002; set(query)'/>
         </form>
       </div>
-        <div className = 'article'>
+      <div className="content">
           <h1>{data.title}</h1>
-            <img src={data.urlToImage} alt=""/>
-            <span>{data.publishedAt}</span>
+         { data.urlToImage !== '' ? 
+            <img src={data.urlToImage} alt={data.title}/>
+            : <img src={placeholder} alt='placeholder image of man reading newspaper'/> }
+            <span>{getDate(data.publishedAt)}</span>
             <p>{data.description}</p>
-            <a href= {data.url} target='_blank' rel="noopener noreferrer">Read Story</a>
-
-            <div className="buttons">
+            <a href= {data.url} target='_blank' rel='noopener noreferrer'>Read Story</a>
+        </div>
+            <div className='buttons'>
               <button 
                 className = 'prev-btn' 
                 onClick = {() => {handleClick('prev')}}>
